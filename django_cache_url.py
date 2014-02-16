@@ -94,10 +94,11 @@ def parse(url):
         else:
             path = list(filter(None, url.path.split('/')))
             config['LOCATION'] = ':'.join((url.netloc, path[0]))
-            tmp = path[1].split(':')
-            config['KEY_PREFIX'] = tmp[0]
-            if len(tmp) == 2:
-                config['VERSION'] = int(tmp[1])
+            config['KEY_PREFIX'] = '/'.join([path[1]])
+            try:
+                config['VERSION'] = int(path[2])
+            except IndexError:
+                pass # Let Django set the default `VERSION`
         if url.scheme == 'hiredis':
             config['OPTIONS'] = {
                 'PARSER_CLASS': 'redis.connection.HiredisParser'}

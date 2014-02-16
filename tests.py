@@ -126,7 +126,7 @@ class TestRedisCache(Base):
 class TestHiredisCache(Base):
     def setUp(self):
         super(TestHiredisCache, self).setUp()
-        environ['CACHE_URL'] = 'hiredis://127.0.0.1:6379/0/prefix:2'
+        environ['CACHE_URL'] = 'hiredis://127.0.0.1:6379/0/prefix/2'
 
     def test_hiredis_url_returns_redis_cache(self):
         location = 'redis_cache.cache.RedisCache'
