@@ -126,7 +126,7 @@ class TestRedisCache(Base):
 class TestHiredisCache(Base):
     def setUp(self):
         super(TestHiredisCache, self).setUp()
-        environ['CACHE_URL'] = 'hiredis://127.0.0.1:6379/0/prefix'
+        environ['CACHE_URL'] = 'hiredis://127.0.0.1:6379/0/prefix:2'
 
     def test_hiredis_url_returns_redis_cache(self):
         location = 'redis_cache.cache.RedisCache'
@@ -140,6 +140,10 @@ class TestHiredisCache(Base):
     def test_hiredis_url_returns_prefix_from_url(self):
         config = django_cache_url.config()
         assert_equals(config['KEY_PREFIX'], 'prefix')
+
+    def test_hiredis_url_returns_version_from_url(self):
+        config = django_cache_url.config()
+        assert_equals(config['VERSION'], 2)
 
     def test_hiredis_url_sets_hiredis_parser(self):
         config = django_cache_url.config()

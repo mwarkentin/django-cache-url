@@ -94,7 +94,10 @@ def parse(url):
         else:
             path = list(filter(None, url.path.split('/')))
             config['LOCATION'] = ':'.join((url.netloc, path[0]))
-            config['KEY_PREFIX'] = '/'.join(path[1:])
+            tmp = path[1].split(':')
+            config['KEY_PREFIX'] = tmp[0]
+            if len(tmp) == 2:
+                config['VERSION'] = int(tmp[1])
         if url.scheme == 'hiredis':
             config['OPTIONS'] = {
                 'PARSER_CLASS': 'redis.connection.HiredisParser'}
