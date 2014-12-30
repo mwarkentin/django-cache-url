@@ -115,7 +115,7 @@ class TestRedisCache(Base):
         environ['CACHE_URL'] = 'redis://127.0.0.1:6379/0/prefix'
 
     def test_redis_url_returns_redis_cache(self):
-        location = 'redis_cache.cache.RedisCache'
+        location = 'django_redis.cache.RedisCache'
         config = django_cache_url.config()
         assert_equals(config['BACKEND'], location)
 
@@ -134,7 +134,7 @@ class TestHiredisCache(Base):
         environ['CACHE_URL'] = 'hiredis://127.0.0.1:6379/0/prefix'
 
     def test_hiredis_url_returns_redis_cache(self):
-        location = 'redis_cache.cache.RedisCache'
+        location = 'django_redis.cache.RedisCache'
         config = django_cache_url.config()
         assert_equals(config['BACKEND'], location)
 
@@ -158,7 +158,7 @@ class TestRedisCacheWithPassword(Base):
         environ['CACHE_URL'] = 'redis://:redispass@127.0.0.1:6379/0/prefix'
 
     def test_redis_url_returns_redis_cache(self):
-        location = 'redis_cache.cache.RedisCache'
+        location = 'django_redis.cache.RedisCache'
         config = django_cache_url.config()
         assert_equals(config['BACKEND'], location)
 
@@ -183,7 +183,7 @@ class TestRedisBothSocketCache(Base):
         environ['CACHE_URL'] = 'redis://unix/path/to/socket/file.sock/1/prefix'
 
     def test_socket_url_returns_redis_cache(self):
-        location = 'redis_cache.cache.RedisCache'
+        location = 'django_redis.cache.RedisCache'
         config = django_cache_url.config()
         assert_equals(config['BACKEND'], location)
 
